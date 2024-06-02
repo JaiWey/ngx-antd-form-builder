@@ -1,0 +1,8 @@
+@use 'sass:color';
+
+$primary-color: #13c2c2;
+$layout-color: #9867f7;
+$primary-background-color: color.change($primary-color, $alpha: 0.06);
+$primary-hover-bg-color : color.change($primary-color, $alpha: 0.20);
+$layout-background-color : color.change($layout-color, $alpha: 0.12);
+$layout-hover-bg-color : color.change($layout-color, $alpha: 0.24);

@@ -1,0 +1,9 @@
+<!-- <nz-checkbox-group [ngModel]="options" (ngModelChange)="log($event)"></nz-checkbox-group> -->
+<nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
+  <label nz-checkbox 
+    *ngFor="let option of options; let index = index" 
+    [nzValue]="option.value" [ngModel]="_first.includes(option.value)"
+    >
+    {{option.label}}
+  </label>
+</nz-checkbox-wrapper>

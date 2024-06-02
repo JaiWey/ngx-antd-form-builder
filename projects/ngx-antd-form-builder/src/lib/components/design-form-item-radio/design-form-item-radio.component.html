@@ -1,0 +1,10 @@
+<nz-radio-group  [ngModel]="value" [nzDisabled]="isDisabled"
+  (ngModelChange)="onModelChange($event)" [ngStyle]="{'width': record.options.width}">
+  <label *ngFor="let lbl of record.options.options" nz-radio [nzValue]="lbl.value">
+    <ng-container *ngIf="!lbl.tooltip">{{lbl.label}}</ng-container>
+    <span style="display: inline-flex; align-items: center;" *ngIf="lbl.tooltip">{{lbl.label}}
+      <i style="margin-left: 2px;" nz-icon nzType="question-circle" nzTheme="outline" 
+        nz-tooltip [nzTooltipTitle]="lbl.tooltip"></i>
+    </span>
+  </label>
+</nz-radio-group>

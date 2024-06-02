@@ -1,0 +1,113 @@
+<div class="properties-centent kk-checkbox">
+  <div class="properties-body">
+    <!-- <div> -->
+      <!-- <div class="preview-width">
+        <span>previewWidth：</span>
+        <nz-input-number [(ngModel)]="config.previewWidth"></nz-input-number>
+      </div> -->
+      <div class="table-layout" *ngIf="config.layout != 'undefined'">
+        <span>
+          Form Layout
+        </span>
+        <div>
+          <nz-radio-group [(ngModel)]="config.layout">
+            <label nz-radio-button nzValue="horizontal">Horizontal</label>
+            <label nz-radio-button nzValue="vertical">Vertical</label>
+            <!-- <label nz-radio-button nzValue="inline">Inline</label> -->
+          </nz-radio-group>
+        </div>
+      </div>
+      <hr>
+
+      <ng-container *ngIf="config.layout == 'horizontal'">
+      <div>
+        <label>
+          Label Layout
+        </label>
+        <div>
+          <nz-radio-group [(ngModel)]="config.labelLayout">
+            <label nz-radio-button nzValue="fixed">Fixed</label>
+            <label nz-radio-button nzValue="flex">Flex</label>
+          </nz-radio-group>
+        </div>
+      </div>
+      <hr>
+      
+      <div class="label-width" [hidden]="config.labelLayout === 'flex'">
+        <label>
+          Label Width(px)：
+        </label>
+        <div>
+          <nz-input-number [(ngModel)]="config.labelWidth"></nz-input-number>
+        </div>
+      </div>
+      <div [hidden]="config.labelLayout !== 'flex'">
+        <label>
+          labelCol:
+        </label>
+        <div class="col-config">
+          <nz-slider
+            nzMax="24" nzMin="0"
+            [(ngModel)]="config.labelCol.xs"
+            (ngModelChange)="handleChangeCol($event)"
+          ></nz-slider>
+            <div>
+              <label>xs:</label>
+              <nz-input-number [(ngModel)]="config.labelCol.xs" ></nz-input-number>
+            </div>
+            <div>
+              <label>sm:</label>
+              <nz-input-number [(ngModel)]="config.labelCol.sm" ></nz-input-number>
+            </div>
+            <div>
+              <label>md:</label>
+              <nz-input-number [(ngModel)]="config.labelCol.md" ></nz-input-number>
+            </div>
+            <div>
+              <label>lg:</label>
+              <nz-input-number [(ngModel)]="config.labelCol.lg" ></nz-input-number>
+            </div>
+            <div>
+              <label>xl:</label>
+              <nz-input-number [(ngModel)]="config.labelCol.xl" ></nz-input-number>
+            </div>
+            <div>
+              <label>xxl:</label>
+              <nz-input-number [(ngModel)]="config.labelCol.xxl" ></nz-input-number>
+            </div>
+        </div>
+      </div>
+      <div [hidden]="config.labelLayout !== 'flex'">
+        <label>
+          Input Col
+        </label>
+        <div class="col-config">  
+            <div>
+              <label>xs:</label>
+              <nz-input-number [(ngModel)]="config.wrapperCol.xs" ></nz-input-number>
+            </div>
+            <div>
+              <label>sm:</label>
+              <nz-input-number [(ngModel)]="config.wrapperCol.sm" ></nz-input-number>
+            </div>
+            <div>
+              <label>md:</label>
+              <nz-input-number [(ngModel)]="config.wrapperCol.md" ></nz-input-number>
+            </div>
+            <div>
+              <label>lg:</label>
+              <nz-input-number [(ngModel)]="config.wrapperCol.lg" ></nz-input-number>
+            </div>
+            <div>
+              <label>xl:</label>
+              <nz-input-number [(ngModel)]="config.wrapperCol.xl" ></nz-input-number>
+            </div>
+            <div>
+              <label>xxl:</label>
+              <nz-input-number [(ngModel)]="config.wrapperCol.xxl" ></nz-input-number>
+            </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

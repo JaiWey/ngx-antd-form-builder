@@ -1,0 +1,30 @@
+<div 
+  class="drag-move-box" 
+  [ngClass]="{'active': record.key === selectItem.key}"
+  (click)="handleSelectItemFn($event)">
+  <div class="form-item-box">
+    <app-design-form-item 
+      [formConfig]="config"
+      [record]="record"
+    ></app-design-form-item>
+  </div>
+    <div
+      [hidden]="true"
+        *ngIf="!hideModel"
+        class="show-key-box"
+      >
+      {{record.label + (record.model ? '/' + record.model : '')}}
+    </div>
+    <!-- <div
+      [ngClass]="['copy', record.key === selectItem.key ? 'active' : 'unactivated']"
+      (click)="handleCopyFn($event)"
+    >
+      <i nz-icon nzType="copy" nzTheme="outline"></i>
+    </div> -->
+    <div
+      [ngClass]="['delete', record.key === selectItem.key ? 'active' : 'unactivated']"
+      (click)="handleDeleteFn($event)"
+    >
+      <i nz-icon nzType="delete" nzTheme="outline"></i>
+  </div>
+</div>

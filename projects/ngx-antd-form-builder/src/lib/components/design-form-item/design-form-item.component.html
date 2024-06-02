@@ -1,0 +1,162 @@
+<ng-container [formGroup]="form">
+  <nz-form-item *ngIf="
+  record.type === 'input' ||
+  record.type === 'textarea' ||
+  record.type === 'number' ||
+  record.type === 'radio' ||
+  record.type === 'checkbox' ||
+  record.type === 'select' ||
+  record.type === 'rate' ||
+  record.type === 'switch' ||
+  record.type === 'slider'"
+    [ngStyle]="isFlex ? { display: 'flex' }:{}">
+    <nz-form-label
+      *ngIf="isFlex && !record.help"
+      [ngStyle]="{ width: layoutConfig.labelWidth + 'px'}"
+      [nzRequired]="required"
+    >{{record.label}}</nz-form-label>
+    <nz-form-label
+      *ngIf="isFlex && record.help"
+      [ngStyle]="{ width: layoutConfig.labelWidth + 'px'}"
+      [nzTooltipTitle]="record.help"
+      [nzRequired]="required"
+    >{{record.label}}</nz-form-label>
+    <nz-form-label [title]="record.label"
+      *ngIf="!isFlex && !record.help"
+      [nzXs]="isCol && layoutConfig.labelCol.xs"
+      [nzSm]="isCol && layoutConfig.labelCol.sm"
+      [nzMd]="isCol && layoutConfig.labelCol.md"
+      [nzLg]="isCol && layoutConfig.labelCol.lg"
+      [nzXl]="isCol && layoutConfig.labelCol.xl"
+      [nzXXl]="isCol && layoutConfig.labelCol.xxl"
+      [nzRequired]="required"
+    >{{record.label}}</nz-form-label>
+    <nz-form-label [title]="record.label"
+      *ngIf="!isFlex && record.help"
+      [nzXs]="isCol && layoutConfig.labelCol.xs"
+      [nzSm]="isCol && layoutConfig.labelCol.sm"
+      [nzMd]="isCol && layoutConfig.labelCol.md"
+      [nzLg]="isCol && layoutConfig.labelCol.lg"
+      [nzXl]="isCol && layoutConfig.labelCol.xl"
+      [nzXXl]="isCol && layoutConfig.labelCol.xxl"
+      nz-tooltip
+      [nzTooltipTitle]="record.help"
+      [nzTooltipIcon]="captchaTooltipIcon"
+      [nzRequired]="required"
+    >{{record.label}}</nz-form-label>
+    <nz-form-control
+      [ngStyle]="isFlex ? { 'flex-grow': '1', width: 'auto' } : {}"
+      [nzXs]="isCol && layoutConfig.wrapperCol.xs"
+      [nzSm]="isCol && layoutConfig.wrapperCol.sm"
+      [nzMd]="isCol && layoutConfig.wrapperCol.md"
+      [nzLg]="isCol && layoutConfig.wrapperCol.lg"
+      [nzXl]="isCol && layoutConfig.wrapperCol.xl"
+      [nzXXl]="isCol && layoutConfig.wrapperCol.xxl"
+      [nzHasFeedback]="record.rules | hasRule"
+      [nzErrorTip]="userErrorTpl">
+      <ng-template #userErrorTpl let-control>
+        <ng-container>
+          {{control.errors?.message}}
+        </ng-container>
+        <!-- <ng-container *ngIf="control.hasError('duplicated')">
+          The username is redundant!
+        </ng-container> -->
+      </ng-template>
+        <ng-container *ngIf="record.type == 'input'">
+          <nz-input-group [nzSuffix]="suffixTemplateInfo" [ngStyle]="{'width': record.options.width}">
+            <input *ngIf="record.options.maxLength" nz-input [formControlName]="record.key"
+               [placeholder]="record.options.placeholder || ''"
+              [maxLength]="record.options.maxLength" />
+            <input *ngIf="!record.options.maxLength"  nz-input [formControlName]="record.key" 
+              [placeholder]="record.options.placeholder || ''" />
+          </nz-input-group>
+        </ng-container>
+        <ng-container *ngIf="record.type == 'textarea'">
+          <nz-input-group [nzSuffix]="suffixTemplateInfo" class="ant-input-affix-wrapper-textarea-with-clear-btn"  [ngStyle]="{'width': record.options.width}">
+            <textarea nz-input *ngIf="record.options.maxLength" [formControlName]="record.key"
+            [placeholder]="record.options.placeholder || ''" [maxLength]="record.options.maxLength"
+            [nzAutosize]="{ minRows: record.options.minRows, maxRows: record.options.maxRows }"></textarea>
+            <textarea nz-input *ngIf="!record.options.maxLength" [formControlName]="record.key" 
+            [placeholder]="record.options.placeholder || ''" [nzAutosize]="{ minRows: record.options.minRows, maxRows: record.options.maxRows }"
+            ></textarea>
+          </nz-input-group>
+        </ng-container>
+        <ng-template #suffixTemplateInfo>
+          <i nz-icon
+              class="ant-input-textarea-clear-icon"
+              style="margin-right: 4px;"
+              nzType="close-circle"
+              *ngIf="(record.type == 'textarea' || record.type == 'input') && record.options.clearable && valueLengthGtZero()"
+              (click)="clearValue()"
+            ></i>
+        </ng-template>
+
+        <ng-container *ngIf="record.type == 'number'">
+          <nz-input-number [formControlName]="record.key" [ngStyle]="{'width': record.options.width}"
+            [nzPlaceHolder]="record.options.placeholder" 
+            [nzPrecision]="record.options.precision" [nzStep]="record.options.step"
+            ></nz-input-number>
+        </ng-container>
+        <ng-container *ngIf="record.type == 'radio'">
+          <app-design-form-item-radio [formControlName]="record.key" [record]="record"></app-design-form-item-radio>
+        </ng-container>
+        <ng-container *ngIf="record.type == 'checkbox'">
+          <!-- <nz-checkbox-group [ngModel]="record.options.options" (ngModelChange)="log($event)"></nz-checkbox-group> -->
+          <app-design-form-item-checkbox  
+          [formControlName]="record.key" [options]="record.options.options"></app-design-form-item-checkbox>
+        </ng-container>
+        <ng-container *ngIf="record.type == 'select'">
+          <nz-select [formControlName]="record.key">
+            <nz-option *ngFor="let lbl of record.options.options" 
+              [nzValue]="lbl.value" [nzLabel]="lbl.label"></nz-option>
+          </nz-select>
+        </ng-container>
+        <ng-container *ngIf="record.type == 'rate'">
+          <nz-rate [formControlName]="record.key" [nzAllowHalf]="record.options.allowHalf"></nz-rate>
+        </ng-container>
+        <ng-container *ngIf="record.type == 'slider'">
+          <nz-slider
+           [formControlName]="record.key"></nz-slider>
+        </ng-container>
+        <ng-container *ngIf="record.type == 'switch'">
+          <nz-switch
+           [formControlName]="record.key"></nz-switch>
+        </ng-container>
+    </nz-form-control>
+  </nz-form-item>
+
+  <ng-container *ngIf="record.type === 'divider'">
+    <nz-divider [nzText]="record.label" [nzOrientation]="record.options.orientation || 'center'"></nz-divider>
+  </ng-container>
+  <ng-container *ngIf="record.type === 'alert'">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-alert [nzMessage]="record.label"
+        [nzDescription]="record.options.description"
+        [nzType]="record.options.type"
+        [nzShowIcon]="record.options.showIcon"
+        [nzCloseable]="record.options.closable"
+        [nzBanner]="record.options.banner">
+        </nz-alert>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  <ng-container *ngIf="record.type === 'text'">
+    <nz-form-item>
+      <nz-form-control>
+        <div [ngStyle]="{ textAlign: record.options.textAlign }">
+          <label
+            [ngClass]="{ 'ant-form-item-required': record.options.showRequiredMark }"
+            [ngStyle]="{
+              fontFamily: record.options.fontFamily,
+              fontSize: record.options.fontSize,
+              color: record.options.color
+            }"
+          >
+            {{record.label}}
+        </label>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+</ng-container>

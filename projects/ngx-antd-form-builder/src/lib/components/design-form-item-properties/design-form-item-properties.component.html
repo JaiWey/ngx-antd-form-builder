@@ -1,0 +1,453 @@
+<div class="properties-centent kk-checkbox">
+  <div class="properties-body">
+    <nz-empty
+      *ngIf="selectItem.key === ''"
+      [nzNotFoundContent]="contentTpl">
+      <ng-template #contentTpl>
+        <span>No Select Component</span>
+      </ng-template>
+    </nz-empty>
+    <div *ngIf="selectItem.key !== ''">
+      <div *ngIf="getType(selectItem.label) !== 'undefined'">
+        <label>
+          Label
+        </label>
+        <div>
+          <input nz-input [(ngModel)]="selectItem.label"/>
+        </div>
+      </div>
+      <div *ngIf="showFreeModel">
+        <label>
+          key
+        </label>
+        <div>
+          <input nz-input [(ngModel)]="selectItem.model"  />
+        </div>
+      </div>
+
+      <hr>
+      <!-- input type start -->
+      <div *ngIf="selectItem.type === 'input'">
+        <label>
+          Input Type
+        </label>
+        <div>
+          <input nz-input [(ngModel)]="options.type"  />
+        </div>
+      </div>
+      <!-- input type end -->
+
+      <div *ngIf="getType(options.rangePlaceholder) !== 'undefined' && options.range; else placeHolderElse">
+        <label>
+          placeholder
+        </label>
+        <div>
+          <input nz-input [(ngModel)]="options.rangePlaceholder[0]"  />
+          <input nz-input [(ngModel)]="options.rangePlaceholder[1]" />
+        </div>
+      </div>
+      <ng-template #placeHolderElse>
+        <div *ngIf="getType(options.placeholder) !== 'undefined'">
+          <label>
+            Placeholder
+          </label>
+          <div>
+            <input nz-input [(ngModel)]="options.placeholder" placeholder="Placeholder" />
+          </div>
+        </div>
+      </ng-template>
+
+      <div *ngIf="selectItem.type === 'textarea'">
+        <label>
+          Size
+        </label>
+        <div>
+          <nz-input-number nzPlaceHolder="最小高度" [(ngModel)]="options.minRows"></nz-input-number>
+          <nz-input-number nzPlaceHolder="最大高度" [(ngModel)]="options.maxRows"></nz-input-number>
+        </div>
+      </div>
+
+      <div *ngIf="getType(options.width) !== 'undefined'">
+        <label>
+          Width
+        </label>
+        <div>
+          <input nz-input [(ngModel)]="options.width"  />
+        </div>
+      </div>
+      <div *ngIf="getType(options.height) !== 'undefined'">
+        <label>
+          Height
+        </label>
+        <div>
+          <nz-input-number [(ngModel)]="options.height" ></nz-input-number>
+        </div>
+      </div>
+      <div *ngIf="getType(options.step) !== 'undefined'">
+        <label>
+          step
+        </label>
+        <div>
+          <nz-input-number [(ngModel)]="options.step" ></nz-input-number>
+        </div>
+      </div>
+      <div *ngIf="getType(options.min) !== 'undefined'">
+        <label>
+          Min value
+        </label>
+        <div>
+          <nz-input-number [(ngModel)]="options.min" ></nz-input-number>
+        </div>
+      </div>
+      <div *ngIf="getType(options.max) !== 'undefined'">
+        <label>
+          Max value
+        </label>
+        <div>
+          <nz-input-number [(ngModel)]="options.max" ></nz-input-number>
+        </div>
+      </div>
+      <div *ngIf="getType(options.maxLength) !== 'undefined'">
+        <label>
+          MaxLength
+        </label>
+        <div>
+          <nz-input-number [(ngModel)]="options.maxLength" ></nz-input-number>
+        </div>
+      </div>
+      <div *ngIf="getType(options.tabBarGutter) !== 'undefined'">
+        <label>
+          TabBarGutter
+        </label>
+        <div>
+          <nz-input-number [(ngModel)]="options.tabBarGutter" ></nz-input-number>
+        </div>
+      </div>
+      <div *ngIf="getType(options.precision) !== 'undefined'">
+        <label>
+          Precision
+        </label>
+        <div>
+          <nz-input-number
+            [nzMin]="0" [nzMax]="50"
+           [(ngModel)]="options.precision" ></nz-input-number>
+        </div>
+      </div>
+
+      <!-- 选项配置及动态数据配置 start -->
+      <div *ngIf="getType(options.options) !== 'undefined'">
+        <label>
+          Options
+        </label>
+        <div>
+          <app-design-form-change-option 
+            [(ngModel)]="options.options"
+          ></app-design-form-change-option>
+        </div>
+      </div>
+      <!-- 选项配置及动态数据配置 end -->
+
+      <!-- tabs配置 start -->
+      <div *ngIf="selectItem.type == 'tabs' || selectItem.type == 'selectInputList'">
+        <label>
+          {{selectItem.type === 'tabs' ? 'Tabs Config' : 'Grid Config'}}
+        </label>
+        <div>
+          <app-design-form-change-option [type]="'tab'" [(ngModel)]="selectItem.columns"></app-design-form-change-option>
+        </div>
+      </div>
+      <!-- tabs配置 end -->
+      <ng-container *ngIf="selectItem.type === 'tabs'">
+        <!-- 页签位置 start -->
+        <div>
+          <label>
+            Tab position
+          </label>
+          <div>
+            <nz-radio-group nzButtonStyle="solid" [(ngModel)]="options.tabPosition">
+              <label nz-radio nzValue="top">top</label>
+              <label nz-radio nzValue="right">right</label>
+              <label nz-radio nzValue="bottom">bottom</label>
+              <label nz-radio nzValue="left">left</label>
+            </nz-radio-group>
+          </div>
+        </div>
+        <!-- 页签位置 end -->
+      
+        <!-- 页签类型 start -->
+        <div>
+          <label>
+            Tab Style
+          </label>
+          <div>
+            <nz-radio-group nzButtonStyle="solid" [(ngModel)]="options.type">
+              <label nz-radio nzValue="line">line</label>
+              <label nz-radio nzValue="card">card</label>
+            </nz-radio-group>
+          </div>
+        </div>
+        <!-- 页签类型 end -->
+      </ng-container>
+      <!-- 页签大小 start -->
+      <div *ngIf="getType(options.size) !== 'undefined'">
+        <label>
+          Size
+        </label>
+        <div>
+          <nz-radio-group [(ngModel)]="options.size">
+            <label nz-radio-button nzValue="large">large</label>
+            <label nz-radio-button nzValue="default">default</label>
+            <label nz-radio-button nzValue="small">small</label>
+          </nz-radio-group>
+        </div>
+      </div>
+      <!-- 页签大小 end -->
+
+      <!-- grid type 配置 start -->
+      <ng-container *ngIf="selectItem.type === 'grid'">
+        <div>
+          <label>
+            Grid Gutter
+          </label>
+          <div>
+            <nz-input-number [(ngModel)]="selectItem.options.gutter" [nzPlaceHolder]="'请输入'"></nz-input-number>
+          </div>
+        </div>
+        <div>
+          <label>
+            Grid Config
+          </label>
+          <div>
+            <app-design-form-change-option [type]="'colspan'" [(ngModel)]="selectItem.columns"></app-design-form-change-option>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- grid type 配置 end-->
+
+      <!-- 默认值部分 start -->
+      <div *ngIf="selectItem.type === 'switch'">
+        <label>
+          Default
+        </label>
+        <div>
+          <nz-switch [(ngModel)]="options.defaultValue"></nz-switch>
+        </div>
+      </div>
+      <div *ngIf="selectItem.type === 'number' || selectItem.type === 'slider'">
+        <label>
+          Default
+        </label>
+        <div>
+          <nz-input-number
+            [nzStep]="options.step"
+            [nzMin]="options.min || -Infinity"
+            [nzMax]="options.max || Infinity"
+            [(ngModel)]="options.defaultValue"
+          ></nz-input-number>
+        </div>
+      </div>
+      <div *ngIf="selectItem.type === 'rate'">
+        <label>
+          Default
+        </label>
+        <div>
+          <nz-rate
+            [nzAllowHalf]="options.allowHalf"
+            [nzCount]="options.max"
+            [(ngModel)]="options.defaultValue"
+          ></nz-rate>
+        </div>
+      </div>
+      <div *ngIf="selectItem.type === 'select'">
+        <label>
+          Default
+        </label>
+        <div>
+          <nz-select style="width: 100%;"
+            [(ngModel)]="options.defaultValue"
+          >
+          <nz-option *ngFor="let option of options.options" 
+            [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+        </nz-select>
+        </div>
+      </div>
+      <div *ngIf="selectItem.type === 'radio'">
+        <label>
+          Default
+        </label>
+        <div>
+          <nz-radio-group [(ngModel)]="options.defaultValue">
+            <label 
+              *ngFor="let item of options.options" nz-radio
+              [nzValue]="item.value">{{item.label}}</label>
+          </nz-radio-group>
+        </div>
+      </div>
+      <div *ngIf="selectItem.type === 'checkbox'">
+        <label>
+          Default
+        </label>
+        <div>
+          <app-design-form-item-checkbox 
+            [options]="options.options" [(ngModel)]="options.defaultValue">
+          </app-design-form-item-checkbox>
+          <!-- <nz-checkbox-group></nz-checkbox-group>
+          <nz-radio-group [(ngModel)]="options.defaultValue">
+            <label 
+              *ngFor="let item of options.options" nz-radio
+              [nzValue]="item.value">{{item.label}}</label>
+          </nz-radio-group> -->
+        </div>
+      </div>
+      <div *ngIf="!(selectItem.type === 'number' || selectItem.type === 'radio' || selectItem.type === 'checkbox' 
+        || selectItem.type === 'date' || selectItem.type === 'rate' || selectItem.type === 'select'
+        || selectItem.type === 'switch' || selectItem.type === 'slider'  || selectItem.type === 'html')
+          && getType(options.defaultValue) !== 'undefined'">
+        <label>
+          Default
+        </label>
+        <div>
+          <input nz-input [(ngModel)]="options.defaultValue"/>
+        </div>
+      </div>
+      <!-- 默认值部分 end -->
+
+
+      <div *ngIf="getType(options.orientation) !== 'undefined'">
+        <label>
+          Text Position
+        </label>
+        <div>
+          <nz-radio-group [(ngModel)]="options.orientation">
+            <label nz-radio-button nzValue="left">Left</label>
+            <label nz-radio-button nzValue="">Center</label>
+            <label nz-radio-button nzValue="right">Right</label>
+          </nz-radio-group>
+        </div>
+      </div>
+
+      <!-- button -->
+      <ng-container *ngIf="selectItem.type === 'button'">
+        <div>
+          <label>
+            Button Type
+          </label>
+          <div>
+            <nz-radio-group [(ngModel)]="options.type">
+              <label nz-radio nzValue="primary">Primary</label>
+              <label nz-radio nzValue="default">Default</label>
+              <label nz-radio nzValue="dashed">Dashed</label>
+              <label nz-radio nzValue="text">Text</label>
+              <label nz-radio nzValue="link">Link</label>
+            </nz-radio-group>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- button -->
+      <ng-container *ngIf="selectItem.type === 'alert'">
+        <div>
+          <label>
+            Description
+          </label>
+          <div>
+            <input nz-input [(ngModel)]="options.description">
+          </div>
+        </div>
+        <div>
+          <label>
+            Alert Type
+          </label>
+          <div>
+            <nz-radio-group nzButtonStyle="solid" [(ngModel)]="options.type">
+              <label nz-radio nzValue="success">success</label>
+              <label nz-radio nzValue="info">info</label>
+              <label nz-radio nzValue="warning">warning</label>
+              <label nz-radio nzValue="error">error</label>
+            </nz-radio-group>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- 折叠面板 start -->
+      <ng-container *ngIf="selectItem.type === 'collapse'">
+        <!-- 页签位置 start -->
+        <div>
+          <label>
+            only one
+          </label>
+          <div>
+            <nz-radio-group [(ngModel)]="options.tabPosition">
+              <label nz-radio [nzValue]="true">True</label>
+              <label nz-radio [nzValue]="false">False</label>
+            </nz-radio-group>
+          </div>
+        </div>
+        <!-- 页签位置 end -->
+      
+        <div>
+          <label>
+            Panel Config
+          </label>
+          <div>
+            <app-design-form-change-option [type]="'collapse'" [(ngModel)]="selectItem.columns"></app-design-form-change-option>
+          </div>
+        </div>
+        <!-- 页签类型 start -->
+      </ng-container>
+      <!-- 折叠面板 end -->
+
+      <ng-container *ngIf="selectItem.type === 'text'">
+        <div>
+          <label>
+            Text align
+          </label>
+          <div>
+            <nz-radio-group nzButtonStyle="solid" [(ngModel)]="options.textAlign">
+              <label nz-radio-button nzValue="left">Left</label>
+              <label nz-radio-button nzValue="center">Center</label>
+              <label nz-radio-button nzValue="right">Right</label>
+            </nz-radio-group>
+          </div>
+        </div>
+      </ng-container>
+      
+
+      <div *ngIf="getOperationProperty()">
+        <label>
+          Operation
+        </label>
+        <div>
+          <label *ngIf="getType(options.hidden) !== 'undefined'" nz-checkbox [(ngModel)]="options.hidden">Hidden</label>
+          <!-- <label *ngIf="getType(options.disabled) !== 'undefined'" nz-checkbox [(ngModel)]="options.disabled">Disable</label> -->
+          <label *ngIf="getType(options.readonly) !== 'undefined'" nz-checkbox [(ngModel)]="options.readonly">ReadOnly</label>
+          <label *ngIf="getType(options.clearable) !== 'undefined'" nz-checkbox [(ngModel)]="options.clearable">Clearable</label>
+          <label *ngIf="getType(options.multiple) !== 'undefined'" nz-checkbox [(ngModel)]="options.multiple">Multiple</label>
+        </div>
+      </div>
+
+      <div *ngIf="getType(selectItem.rules) !== 'undefined'
+        && selectItem.rules.length > 0">
+        <label>
+          Validate
+        </label>
+        <div>
+          <label  nz-checkbox [(ngModel)]="selectItem.rules[0].required">Required</label>
+          <input nz-input [(ngModel)]="selectItem.rules[0].message" placeholder="Validate Tooltip" />
+        </div>
+        <app-design-form-change-option [type]="'rules'" [(ngModel)]="selectItem.rules"></app-design-form-change-option>
+      </div>
+
+      
+      <!-- <div *ngIf="getType(selectItem.help) !== 'undefined'">
+        <label>
+          Help tooltip
+        </label>
+        <div>
+          <input nz-input [(ngModel)]="selectItem.help" />
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
