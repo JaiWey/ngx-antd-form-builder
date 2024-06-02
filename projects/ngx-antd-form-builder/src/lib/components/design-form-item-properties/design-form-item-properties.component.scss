@@ -1,0 +1,49 @@
+:host{
+  display: block;
+  width: 100%;
+  padding: 0 10px 10px 10px;
+  .properties-body{
+    > div{
+      > div{
+        display: flex;
+        width: 100%;
+        margin-bottom: 10px;
+        > label{
+          width: 80px;
+          line-height: 32px;
+          flex-shrink: 0;
+        }
+        > div{
+          width: calc(100% - 80px);
+          input{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  
+}
+.option-change-container {
+  width: calc(100% - 8px);
+}
+.option-change-box {
+  height: 38px;
+  padding-bottom: 6px;
+  .option-delete-box {
+    margin-top: 3px;
+    background: #ffe9e9;
+    color: #f22;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.3s;
+    &:hover {
+      background: #f22;
+      color: #fff;
+    }
+  }
+}

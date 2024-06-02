@@ -1,0 +1,15 @@
+<ngx-codemirror
+  [ngModel]="data.json"
+  [options]="{
+    lineNumbers: true,
+    theme: 'material',
+    mode: 'javascript'
+  }"
+></ngx-codemirror>
+<hr>
+<div class="btn-group">
+  <nz-button-group>
+    <button nz-button nzType="default" (click)="close()">Close</button>
+    <button nz-button nzType="primary" (click)="copy()">Copy JSON Data</button>
+  </nz-button-group>
+</div>

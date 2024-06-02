@@ -1,0 +1,22 @@
+<div class="form-panel">
+  <div class="panel-btn">
+    <button nz-button (click)="openPreview()">Preview</button>
+    <button nz-button (click)="openJsonSchema()">View Schema</button>
+  </div>
+  <form nz-form  class="a-form-box"
+    [nzLayout]="data.config.layout" [ngStyle]="data.config.customStyle">
+    <div class="draggable-box">
+      <div class="list-main" [sortablejs]="data.list" [sortablejsOptions]="options">
+        <app-layout-item class="drag-move" *ngFor="let item of data.list" 
+          [record]="item" [config]="data.config"
+          [selectItem]="selectItem"
+          (handleColAdd)="handleColAdd($event)"
+          (handleSelectItem)="handleSetSelectItem.emit($event)"
+          (handleCopy)="handleCopy($event, $event)"
+          (handleDelete)="handleDelete($event)"
+          >
+        </app-layout-item>
+      </div>
+    </div>
+  </form>
+</div>

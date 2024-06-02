@@ -1,0 +1,8 @@
+<ul
+  [sortablejs]="_fields" [sortablejsOptions]="options"
+>
+  <li class="draggable-item" *ngFor="let val of _fields; index as i"
+    >
+    {{ val.label }}
+    </li>
+</ul>

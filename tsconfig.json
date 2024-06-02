@@ -7,8 +7,14 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
+    "paths": {
+      "ngx-antd-form-builder": [
+        "./dist/ngx-antd-form-builder"
+      ]
+    },
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,

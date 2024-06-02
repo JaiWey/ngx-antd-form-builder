@@ -1,0 +1,147 @@
+<div [ngSwitch]="record.type">
+  <ng-container *ngSwitchCase="'tabs'">
+    <div [ngClass]="['grid-box', record.key === selectItem.key ? 'active' : 'unactivated']"
+      (click)="handleSelectItemAndStop($event)">
+      <nz-tabset class="grid-row" [nzTabBarGutter]="record.options.tabBarGutter" [nzType]="record.options.type"
+        [nzSize]="record.options.size" [nzTabPosition]="record.options.tabPosition"
+        [nzAnimated]="record.options.animated">
+        <nz-tab *ngFor="let colItem of record.columns; index as i" [nzTitle]="colItem.label">
+          <div class="grid-col">
+            <div class="draggable-box">
+              <div class="list-main" [sortablejs]="colItem.list" [sortablejsOptions]="genOptions(colItem, i)">
+                <app-layout-item class="drag-move" *ngFor="let subItem of colItem.list" [record]="subItem"
+                  [selectItem]="selectItem" [config]="config" 
+                  (itemDrop)="onDragDrop($event)" (handleDelete)="handleDelete.emit($event)"
+                  (handleColAdd)="handleColAdd.emit($event)"
+                  (handleCopy)="handleCopy.emit($event)" (handleSelectItem)="handleSelectItem.emit($event)">
+                </app-layout-item>
+              </div>
+            </div>
+          </div>
+        </nz-tab>
+      </nz-tabset>
+      <ng-container *ngTemplateOutlet="copyAndDelete"></ng-container>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'card'">
+    <div [ngClass]="['grid-box', record.key === selectItem.key ? 'active' : 'unactivated']"
+      (click)="handleSelectItemAndStop($event)">
+      <nz-card class="grid-row" [nzTitle]="nzCardTitle">
+        <div class="grid-col">
+          <div class="draggable-box">
+            <div class="list-main" [sortablejs]="record.list" [sortablejsOptions]="genOptions(record, 0)">
+              <app-layout-item class="drag-move" *ngFor="let subItem of record.list" [record]="subItem"
+                [selectItem]="selectItem" [config]="config" 
+                (itemDrop)="onDragDrop($event)" (handleDelete)="handleDelete.emit($event)"
+                (handleCopy)="handleCopy.emit($event)" (handleSelectItem)="handleSelectItem.emit($event)">
+              </app-layout-item>
+            </div>
+          </div>
+        </div>
+      </nz-card>
+      <ng-template #nzCardTitle>
+        <div style="white-space: normal;">{{record.label}}</div>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="copyAndDelete"></ng-container>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'block'">
+    <div [ngClass]="['grid-box', record.key === selectItem.key ? 'active' : 'unactivated']"
+      (click)="handleSelectItemAndStop($event)">
+      <div class="grid-row">
+        <div class="grid-col">
+          <div class="draggable-box">
+            <div class="list-main" [sortablejs]="record.list" [sortablejsOptions]="genOptions(record, 0)">
+              <app-layout-item class="drag-move" *ngFor="let subItem of record.list" [record]="subItem"
+                [selectItem]="selectItem" [config]="config" 
+                (itemDrop)="onDragDrop($event)" (handleDelete)="handleDelete.emit($event)"
+                (handleCopy)="handleCopy.emit($event)" (handleSelectItem)="handleSelectItem.emit($event)">
+              </app-layout-item>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #nzCardTitle>
+        <div style="white-space: normal;">{{record.label}}</div>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="copyAndDelete"></ng-container>
+    </div>
+  </ng-container>
+    <ng-container *ngSwitchCase="'grid'">
+      <div [ngClass]="['grid-box', record.key === selectItem.key ? 'active' : 'unactivated']"
+        (click)="handleSelectItemAndStop($event)">
+        <div class="grid-row"  nz-row [nzGutter]="record.options.gutter">
+          <div  class="grid-col" *ngFor="let colItem of record.columns; index as i" nz-col [nzSpan]="colItem.span || 0">
+            <div class="draggable-box">
+              <div class="list-main" [sortablejs]="colItem.list"
+                [sortablejsOptions]="genOptions(colItem, i)">
+                <app-layout-item class="drag-move" *ngFor="let subItem of colItem.list" 
+                  [record]="subItem" 
+                  [config]="config"
+                  [selectItem]="selectItem" 
+                  (itemDrop)="onDragDrop($event)"
+                  (handleColAdd)="handleColAdd.emit($event)"
+                  (handleDelete)="handleFormNodeDelete($event)"
+                  (handleSelectItem)="handleSelectItem.emit($event)">
+                </app-layout-item>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-container *ngTemplateOutlet="copyAndDelete"></ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'collapse'">
+      <div [ngClass]="['grid-box', record.key === selectItem.key ? 'active' : 'unactivated']" 
+        (click)="handleSelectItemAndStop($event)">
+        <nz-collapse class="grid-row"
+          [nzAccordion]="record.options.accordion"
+          [nzBordered]="record.options.bordered"
+          [nzGhost]="record.options.ghost"
+          [nzExpandIconPosition]="record.options.expandIconPosition"
+        >
+          <nz-collapse-panel [nzActive]="true" *ngFor="let colItem of record.columns; index as i" [nzHeader]="colItem.label">
+            <div class="grid-col">
+              <div class="draggable-box">
+                <div class="list-main"
+                [sortablejs]="colItem.list" [sortablejsOptions]="genOptions(colItem, i)">
+                 <app-layout-item 
+                  class="drag-move" *ngFor="let subItem of colItem.list"
+                   [record]="subItem" 
+                   [selectItem]="selectItem"
+                   [config]="config"
+                   (itemDrop)="onDragDrop($event)"
+                   (handleColAdd)="handleColAdd.emit($event)"
+                   (handleDelete)="handleDelete.emit($event)"
+                   (handleCopy)="handleCopy.emit($event)"
+                   (handleSelectItem)="handleSelectItem.emit($event)">
+                 </app-layout-item>
+               </div>
+              </div>
+            </div>
+          </nz-collapse-panel>
+        </nz-collapse>
+        <ng-container *ngTemplateOutlet="copyAndDelete"></ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <app-design-form-node class="drag-move" 
+        [selectItem]="selectItem"
+        [config]="config"
+        [record]="record"
+        (handleDelete)="handleFormNodeDelete($event)"
+        (handleSelectItem)="handleSelectItem.emit($event)"
+        (handleCopy)="handleCopy.emit($event)"
+      ></app-design-form-node>
+    </ng-container>
+</div>
+<ng-template #copyAndDelete>
+  <!-- <div [ngClass]="['copy', record.key === selectItem.key ? 'active' : 'unactivated']" 
+  (click)="handleCopyFn($event)">
+    <i nz-icon nzType="copy" nzTheme="outline"></i>
+  </div> -->
+  <div [hidden]="hiddenDelete()" [ngClass]="['delete', record.key === selectItem.key ? 'active' : 'unactivated']"
+    (click)="handleDeleteFn($event)">
+    <i nz-icon nzType="delete" nzTheme="outline"></i>
+  </div>
+</ng-template>

@@ -1,0 +1,71 @@
+<ng-container [ngSwitch]="record.type" [formGroup]="form">
+  <div nz-row class="grid-row" *ngSwitchCase="'grid'" [nzGutter]="record.options.gutter">
+    <div class="grid-col" *ngFor="let colItem of record.columns; index as i" nz-col [nzSpan]="colItem.span || 0">
+        <app-build-blocks *ngFor="let subItem of colItem.list" 
+          [record]="subItem"
+          [formConfig]="formConfig"
+          [form]="form"
+          >
+        </app-build-blocks>
+    </div>
+  </div>
+  <nz-tabset class="grid-row" *ngSwitchCase="'tabs'"
+    [nzTabBarGutter]="record.options.tabBarGutter"
+    [nzType]="record.options.type"
+    [nzSize]="record.options.size"
+    [nzTabPosition]="record.options.tabPosition"
+    [nzAnimated]="record.options.animated"
+    >
+    <nz-tab  *ngFor="let colItem of record.columns; index as i" 
+    [nzTitle]="colItem.label">
+      <div [ngStyle]="{'max-height': record.options.contentMaxHeight, 'overflow-y': 'auto' }" 
+      *ngIf="record.options.contentMaxHeight != null && record.options.contentMaxHeight != -1">
+        <app-build-blocks *ngFor="let subItem of colItem.list" 
+        [record]="subItem"
+        [formConfig]="formConfig"
+        [form]="form"
+        >
+      </app-build-blocks>
+      </div>
+      <ng-container *ngIf="record.options.contentMaxHeight == null || record.options.contentMaxHeight == -1">
+        <app-build-blocks *ngFor="let subItem of colItem.list" 
+        [record]="subItem"
+        [formConfig]="formConfig"
+        [form]="form"
+        >
+      </app-build-blocks>
+      </ng-container>
+    </nz-tab>
+  </nz-tabset>
+  <nz-collapse *ngSwitchCase="'collapse'"
+    class="grid-row" [nzAccordion]="record.options.accordion" [nzBordered]="record.options.bordered"
+    [nzGhost]="record.options.ghost" [nzExpandIconPosition]="record.options.expandIconPosition">
+    <nz-collapse-panel [nzActive]="true" *ngFor="let colItem of record.columns; index as i" [nzHeader]="colItem.label">
+      <app-build-blocks *ngFor="let subItem of colItem.list" 
+        [record]="subItem"
+        [formConfig]="formConfig"
+        [form]="form"
+        >
+      </app-build-blocks>
+    </nz-collapse-panel>
+  </nz-collapse>
+  <nz-card *ngSwitchCase="'card'" class="grid-row"
+  [nzTitle]="nzCardTitle" 
+  >
+    <app-build-blocks *ngFor="let subItem of record.list" 
+    [record]="subItem"
+    [formConfig]="formConfig"
+    [form]="form"
+    >
+  </app-build-blocks>
+  </nz-card>
+  <ng-template #nzCardTitle>
+    <div style="padding-right: 12px; white-space: normal;">{{record.label}}</div>
+  </ng-template>
+  <app-design-form-item *ngSwitchDefault
+    [formConfig]="formConfig"
+    [record]="record"
+    [form]="form"
+  >
+  </app-design-form-item>
+</ng-container>
