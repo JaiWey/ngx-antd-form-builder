@@ -1,10 +1,10 @@
 <div class="properties-centent kk-checkbox">
   <div class="properties-body">
     <!-- <div> -->
-      <!-- <div class="preview-width">
-        <span>previewWidth：</span>
-        <nz-input-number [(ngModel)]="config.previewWidth"></nz-input-number>
-      </div> -->
+      <div class="preview-width">
+        <span>width：</span>
+        <input nz-input [(ngModel)]="config.previewWidth"/>
+      </div>
       <div class="table-layout" *ngIf="config.layout != 'undefined'">
         <span>
           Form Layout

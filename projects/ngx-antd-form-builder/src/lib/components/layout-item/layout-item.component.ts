@@ -38,7 +38,6 @@ export class LayoutItemComponent implements OnChanges {
   ) {
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log()
   }
 
   genOptions(colItem, index): Options {

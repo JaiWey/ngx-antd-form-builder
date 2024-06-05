@@ -11,7 +11,7 @@ import { BuildBlocksComponent } from "./components/build-blocks/build-blocks.com
   template: `
   <form *ngIf="json && json.list" nz-form [nzLayout]="json.config.layout"
     class="k-form-build-9136076486841527"
-    [formGroup]="_form" [ngStyle]="{'width': json.config.previewWidth + 'px'}">
+    [formGroup]="_form" [ngStyle]="{'width': json.config.previewWidth}">
     <app-build-blocks *ngFor="let record of json.list; index as i"
       [record]="record"
       [form]="_form"
@@ -27,7 +27,7 @@ import { BuildBlocksComponent } from "./components/build-blocks/build-blocks.com
 })
 export class NgxAntdFormViewerComponent implements OnChanges {
   @Input() json: any;
-  @Input() initValue: {[key: string]: any} = {};
+  @Input() initData: {[key: string]: any} = {};
   @Input() readonly readonly: boolean = false;
   @Input() readonly needInit: boolean = true;
   @Output() readonly Submit = new EventEmitter();
@@ -42,7 +42,6 @@ export class NgxAntdFormViewerComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["json"]) {
-      //每次初始化刷新readlonly
       this.refreshFormGroup()
       this.refreshReadOnly(this.readonly)
     }
@@ -121,7 +120,7 @@ export class NgxAntdFormViewerComponent implements OnChanges {
     this._flatResult = result;
     const obj = result.reduce((prev, cur) => {
       prev[cur.key] = 
-        this.initValue && this.initValue[cur.key] !== undefined ? [this.initValue[cur.key]] : /**/
+        this.initData && this.initData[cur.key] !== undefined ? [this.initData[cur.key]] : /**/
         [this.needInit && cur.options?.defaultValue || ''];
       if (cur.rules) {
         prev[cur.key].push(genRulesValidatorFn(cur.rules))

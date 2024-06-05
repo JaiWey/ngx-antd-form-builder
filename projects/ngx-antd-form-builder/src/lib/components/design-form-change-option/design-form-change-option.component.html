@@ -20,24 +20,24 @@
       <button nz-button nzType="primary" (click)="handleAdd()">Add</button>
     </div>
   </div>
-  <div nz-row *ngIf="type === 'rules'">
-    <div class="option-change-box" *ngFor="let val of _value; let index = index">
+  <div *ngIf="type === 'rules'">
+    <div nz-row class="option-change-box" *ngFor="let val of _value; let index = index">
       <ng-container *ngIf="index !== 0">
-        <div nz-col nzSpan="18">
-          <input type="text" [(ngModel)]="val.message" nz-input placeholder="nzMessage">
+        <div nz-col nzSpan="24">
+          <input type="text" [(ngModel)]="val.message" nz-input placeholder="Validation Tooltip">
         </div>
-        <div nz-col nzSpan="18">
-          <input type="text" [(ngModel)]="val.pattern" nz-input placeholder="regex">
+        <div nz-col nzSpan="20">
+          <input type="text" [(ngModel)]="val.pattern" nz-input placeholder="Regex pattern">
         </div>
-        <div nz-col nzSpan="6">
+        <div nz-col nzSpan="4">
           <div class="option-delete-box" (click)="handleDelete(index)">
-            <i nz-icon nzType="delete"></i>
+            <button nz-button nzType="primary" nzDanger><i nz-icon nzType="delete"></i></button>
           </div>
         </div>
       </ng-container>
     </div>
     <div nz-col nzSpan="24">
-      <a (click)="handleAddRules()">Add </a>
+      <button nz-button nzType="primary" (click)="handleAddRules()">Add</button>
     </div>
   </div>
   <div *ngIf="type === 'colspan'">

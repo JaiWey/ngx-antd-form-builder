@@ -21,7 +21,7 @@
           key
         </label>
         <div>
-          <input nz-input [(ngModel)]="selectItem.model"  />
+          <input nz-input [(ngModel)]="selectItem.key"  />
         </div>
       </div>
 
@@ -427,18 +427,25 @@
         </div>
       </div>
 
-      <div *ngIf="getType(selectItem.rules) !== 'undefined'
-        && selectItem.rules.length > 0">
-        <label>
-          Validate
-        </label>
-        <div>
-          <label  nz-checkbox [(ngModel)]="selectItem.rules[0].required">Required</label>
-          <input nz-input [(ngModel)]="selectItem.rules[0].message" placeholder="Validate Tooltip" />
+      <ng-container *ngIf="getType(selectItem.rules) !== 'undefined'
+      && selectItem.rules.length > 0">
+        <div >
+          <label>
+            Validation
+          </label>
+          <div>
+            <label nz-checkbox [(ngModel)]="selectItem.rules[0].required">Required</label>
+            <input nz-input [(ngModel)]="selectItem.rules[0].message" placeholder="Error Tooltip" />
+          </div>
         </div>
-        <app-design-form-change-option [type]="'rules'" [(ngModel)]="selectItem.rules"></app-design-form-change-option>
-      </div>
-
+        <div >
+          <label>
+          </label>
+          <div>
+            <app-design-form-change-option [type]="'rules'" [(ngModel)]="selectItem.rules"></app-design-form-change-option>
+          </div>
+        </div>
+      </ng-container>
       
       <!-- <div *ngIf="getType(selectItem.help) !== 'undefined'">
         <label>

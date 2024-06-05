@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -58,6 +58,7 @@ import { cloneDeep } from './utils/func';
       [data]="data"
       [selectItem]="selectItem"
       (handleSetSelectItem)="handleSetSelectItem($event)"
+      (saveSchema)="save()"
     ></app-design-form-component-panel>
   </section>
   <aside class="right">
@@ -96,8 +97,8 @@ import { cloneDeep } from './utils/func';
 })
 export class NgxAntdFormBuilderComponent {
   @Input() fields: Array<string> = DefaultFields
-  @Input() attrLists: Array<any> = []
-
+  @Input() json: string | {[key: string]: string} | undefined
+  @Output() readonly saveSchema: EventEmitter<NgxAntdFormBuilder.Config> = new EventEmitter()
   //@ViewChild('appDesignFormItemProperties') public appDesignFormItemProperties: DesignFormItemPropertiesComponent;
   //@Input() initData: any
   basicArray: Array<NgxAntdFormBuilder.AllComponentType> = ComponentList.filter(item => this.fields.includes(item.type));
@@ -131,31 +132,29 @@ export class NgxAntdFormBuilderComponent {
     key: ""
   }
   activeKey: number = 0;
-  noModel: Array<string> = [
-    "button",
-    "divider",
-    "card",
-    "grid",
-    "tabs",
-    "table",
-    "alert",
-    "text",
-    "html"
-  ]
 
   constructor(
   ) {
   }
 
   ngOnInit(): void {
-    console.log()
-    //this.data = cloneDeep(this.initData)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['fields']) {
       this.basicArray = ComponentList.filter(item => this.fields.includes(item.type))
       this.layoutArray = LayoutList.filter(item => this.fields.includes(item.type));
+    }
+    if (changes['json'] && changes['json'].currentValue) {
+      if (typeof changes['json'].currentValue === 'string') {
+        try {
+          this.init(JSON.parse(changes['json'].currentValue))
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        this.init(this.json)
+      }
     }
   }
 
@@ -166,7 +165,6 @@ export class NgxAntdFormBuilderComponent {
   public recursiveGetComponentList() {
     const list: Array<NgxAntdFormBuilder.AllType> = []
     const recursivePush = (item: NgxAntdFormBuilder.AllType) => {
-      //if (['input','textarea','number','select','checkbox','radio','date','rate','slider'])
       if ( 'card' == item.type) {
         item.list.forEach(recursivePush)
       } else if (item.type == 'tabs' || item.type == 'grid' || item.type == 'collapse') {
@@ -181,39 +179,25 @@ export class NgxAntdFormBuilderComponent {
     return list
   }
 
-  getData() {
+  public getData() {
     return cloneDeep(this.data)
   }
 
-  getJsonSchema() {
+  public getJsonSchema() {
     return JSON.stringify(this.data, null, "\t")
   }
 
+  save() {
+    this.saveSchema.emit(this.getData())
+  }
+
   generateKey(list, index) {
-    // 生成key值
     const key = list[index].type + "_" + new Date().getTime();
-    // this.$set(list, index, {
-    //   ...list[index],
-    //   key,
-    //   model: key
-    // });
-    list[index].key = list[index].model = key
-    // list[index] = {
-    //   ...list[index],
-    //   key,
-    //   model: key
-    // }
-    if (this.noModel.includes(list[index].type)) {
-      // 删除不需要的model属性
-      delete list[index].model;
-    }
+    list[index].key  = key
   }
 
   handleSetSelectItem(record) {
-          // 设置selectItem的值
     this.selectItem = record;
-
-    // 判断是否选中控件，如果选中则弹出属性面板，否则关闭属性面板
     if (record.key) {
       this.changeTab(2);
     } else {

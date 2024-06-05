@@ -42,8 +42,7 @@ export class DesignFormItemPropertiesComponent implements OnChanges {
   }
 
   get showFreeModel() {
-    return (!this.hideModel && 'model' in this.selectItem &&
-      typeof this.selectItem.model !== 'undefined')
+    return typeof this.selectItem.key !== 'undefined'
   }
   getType(input: unknown) {
     return typeof input
@@ -51,15 +50,9 @@ export class DesignFormItemPropertiesComponent implements OnChanges {
 
   getOperationProperty() {
     return typeof this.options.hidden !== 'undefined' ||
-      typeof this.options.disabled !== 'undefined' ||
       typeof this.options.readonly !== 'undefined' ||
       typeof this.options.clearable !== 'undefined' ||
-      typeof this.options.multiple !== 'undefined' ||
-      typeof this.options.range !== 'undefined' ||
-      typeof this.options.showTime !== 'undefined' ||
-      typeof this.options.allowHalf !== 'undefined' ||
-      typeof this.options.showInput !== 'undefined' ||
-      typeof this.options.animated !== 'undefined'
+      typeof this.options.multiple !== 'undefined'
   }
 
   colOverrideChange($event) {

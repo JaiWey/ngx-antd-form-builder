@@ -28,6 +28,7 @@ export class DesignFormComponentPanelComponent {
   @Input() data: any
   @Input() selectItem: any;
   @Output() readonly handleSetSelectItem: EventEmitter<any> = new EventEmitter()
+  @Output() readonly saveSchema: EventEmitter<void> = new EventEmitter()
   options: Options = {
     group: 'draggable-box',
     // ghostClass: 'moving',
@@ -74,6 +75,10 @@ export class DesignFormComponentPanelComponent {
     })
   }
 
+  save() {
+    this.saveSchema.emit();
+  }
+
   deepClone(evt) {
     const newIndex = evt.newIndex;
     // json深拷贝一次
@@ -93,22 +98,10 @@ export class DesignFormComponentPanelComponent {
     const newIndex = evt.newIndex;
     const key = columns[newIndex].type + "_" + new Date().getTime();
     if (columns[newIndex].key === "" || isCopy) {
-      // this.$set(columns, newIndex, {
-      //   ...columns[newIndex],
-      //   key,
-      //   model: key
-      // });
       columns[newIndex] = {
         ...columns[newIndex],
         key,
-        model: key
       }
-      /** 
-      if (this.noModel.includes(columns[newIndex].type)) {
-        // 删除不需要的model属性
-        delete columns[newIndex].model;
-      }
-      */
       if (typeof columns[newIndex].options !== "undefined") {
         // 深拷贝options
         //const optionsStr = JSON.stringify(columns[newIndex].options);

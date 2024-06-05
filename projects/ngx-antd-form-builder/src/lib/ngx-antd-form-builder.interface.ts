@@ -3,7 +3,7 @@ export declare namespace NgxAntdFormBuilder {
   type rules = Array<rule>
   type option = Record<'value' | 'label', string>
 
-  type CommonProperty = Record<'label' | 'model' | 'key' | 'help', string>
+  type CommonProperty = Record<'label' | 'key' | 'help', string>
 
   export type InputType = {
     type: 'input',
@@ -92,7 +92,7 @@ export declare namespace NgxAntdFormBuilder {
     {
       type: 'text',
       options: Record<'textAlign' | 'color' | 'fontFamily' | 'fontSize', string>
-      & Record<'hidden' | 'showRequiredMark', boolean>
+      & Record<'showRequiredMark', boolean>
     } &
     Record<'label' | 'key', string>
 

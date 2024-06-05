@@ -2,6 +2,7 @@
   <div class="panel-btn">
     <button nz-button (click)="openPreview()">Preview</button>
     <button nz-button (click)="openJsonSchema()">View Schema</button>
+    <button nz-button nzType="primary" (click)="save()">Save</button>
   </div>
   <form nz-form  class="a-form-box"
     [nzLayout]="data.config.layout" [ngStyle]="data.config.customStyle">

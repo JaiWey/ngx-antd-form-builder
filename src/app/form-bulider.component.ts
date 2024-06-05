@@ -1,25 +1,23 @@
 import { CommonModule } from "@angular/common";
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { NgxAntdFormBuilderComponent } from '../../projects/ngx-antd-form-builder/src/public-api';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-form-build',
   standalone: true,
   imports: [
     CommonModule,
     NgxAntdFormBuilderComponent
   ],
   template: `
-  <ngx-antd-form-builder #FormBuilder></ngx-antd-form-builder>
+  <ngx-antd-form-builder (saveSchema)="save($event)"></ngx-antd-form-builder>
   `,
 })
 
-export class FormBuilderComponent implements AfterViewInit {
+export class FormBuilderComponent {
   @ViewChild('FormBuilder') FormBuilder!: NgxAntdFormBuilderComponent;
 
-  ngAfterViewInit(): void {
-    // const _data =  {
-    // }
-    // this.FormBuilder.init(_data);
+  save(json) {
+    console.log(json)
   }
 }

@@ -2,7 +2,7 @@ import { NgxAntdFormBuilder } from "../ngx-antd-form-builder.interface";
 
 const inputComponent: NgxAntdFormBuilder.InputType = {
   type: "input",
-  label: "Input", // 标题文字
+  label: "Input", 
   options: {
     type: "text",
     width: "100%",
@@ -12,13 +12,12 @@ const inputComponent: NgxAntdFormBuilder.InputType = {
     maxLength: null,
     disabled: false 
   },
-  model: "", // 数据字段
   key: "",
   help: "",
   rules: [
     {
       required: false, 
-      message: "Required"
+      message: "Field Required"
     }
   ]
 }
@@ -36,13 +35,12 @@ options: {
   disabled: false,
   placeholder: ""
 },
-model: "", // 数据字段
 key: "",
 help: "",
 rules: [
   {
     required: false,
-    message: "Required"
+    message: "Field Required"
   }
 ]}
 
@@ -59,13 +57,12 @@ const numberComponent: NgxAntdFormBuilder.NumberType =   {
     disabled: false, 
     placeholder: ""
   },
-  model: "", 
   key: "",
   help: "",
   rules: [
     {
       required: false,
-      message: "Required"
+      message: "Field Required"
     }
   ]
 };
@@ -74,11 +71,11 @@ const selectComponent: NgxAntdFormBuilder.SelectType =   {
   type: "select", 
   label: "Select", 
   options: {
-    width: "100%", // 宽度
-    defaultValue: undefined, // 下拉选框请使用undefined为默认值
-    multiple: false, // 是否允许多选
-    disabled: false, // 是否禁用
-    clearable: false, // 是否显示清除按钮
+    width: "100%", 
+    defaultValue: undefined, 
+    multiple: false, 
+    disabled: false, 
+    clearable: false,
     placeholder: "", 
     dynamicKey: "",
     options: [
@@ -92,13 +89,12 @@ const selectComponent: NgxAntdFormBuilder.SelectType =   {
       }
     ],
   },
-  model: "",
   key: "",
   help: "",
   rules: [
     {
       required: false,
-      message: "Required"
+      message: "Field Required"
     }
   ]
 };
@@ -121,13 +117,12 @@ const checkBoxComponent: NgxAntdFormBuilder.CheckboxType =  {
       },
     ]
   },
-  model: "",
   key: "",
   help: "",
   rules: [
     {
       required: false,
-      message: "Required"
+      message: "Field Required"
     }
   ]
 };
@@ -150,13 +145,12 @@ const radioComponent: NgxAntdFormBuilder.RadioType = {
       },
     ]
   },
-  model: "",
   key: "",
   help: "",
   rules: [
     {
       required: false,
-      message: "Required"
+      message: "Field Required"
     }
   ]
 };
@@ -170,13 +164,12 @@ const rateComponent: NgxAntdFormBuilder.RateType =   {
     disabled: false, 
     allowHalf: false
   },
-  model: "",
   key: "",
   help: "",
   rules: [
     {
       required: false,
-      message: "Required"
+      message: "Field Required"
     }
   ]
 };
@@ -193,13 +186,12 @@ const sliderComponent: NgxAntdFormBuilder.SliderType = {
       step: 1, 
       showInput: false
     },
-    model: "",
     key: "",
     help: "",
     rules: [
       {
         required: false,
-        message: "必填项"
+        message: "Field Required"
       }
     ]
 };
@@ -211,13 +203,12 @@ const switchComponent: NgxAntdFormBuilder.SwitchType =   {
     defaultValue: false, 
     disabled: false 
   },
-  model: "",
   key: "",
   help: "",
   rules: [
     {
       required: false,
-      message: "必填项"
+      message: "Field Required"
     }
   ]
 };
@@ -240,7 +231,6 @@ const textComponent: NgxAntdFormBuilder.TextType =   {
   label: "Text",
   options: {
     textAlign: "left",
-    hidden: false, // 是否隐藏，false显示，true隐藏
     showRequiredMark: false,
     color: "rgb(0, 0, 0)",
     fontFamily: "SimHei",
@@ -262,7 +252,6 @@ const dividerLayout: NgxAntdFormBuilder.DividerLayout =  {
     orientation: "left"
   },
   key: "",
-  model: ""
 };
 
 const cardLayout: NgxAntdFormBuilder.CardLayout = 
@@ -271,7 +260,6 @@ const cardLayout: NgxAntdFormBuilder.CardLayout =
   label: "Card",
   list: [],
   key: "",
-  model: ""
 }
 
 const tabsLayout: NgxAntdFormBuilder.TabsLayout =
@@ -298,7 +286,6 @@ const tabsLayout: NgxAntdFormBuilder.TabsLayout =
     }
   ],
   key: "",
-  model: ""
 };
 
 const gridLayout: NgxAntdFormBuilder.GridLayout = {
@@ -318,7 +305,6 @@ const gridLayout: NgxAntdFormBuilder.GridLayout = {
     gutter: 0
   },
   key: "",
-  model: ""
 };
 
 const collapseLayout: NgxAntdFormBuilder.CollapseLayout ={
@@ -344,7 +330,6 @@ const collapseLayout: NgxAntdFormBuilder.CollapseLayout ={
     }
   ],
   key: "",
-  model: ""
 };
 
 export const LayoutList: Array<NgxAntdFormBuilder.AllLayout> = [

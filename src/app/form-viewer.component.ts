@@ -1,58 +1,7 @@
-# ngx-antd-form-builder
-Simple Angular form builder that quickly generated forms.
-- Angular 17 standalone component
-- Use ng-zorro-antd as UI library
-- Use sortable.js for Drag & Drop
-- Support regex validation
-- Support nested layout
+import { CommonModule } from "@angular/common";
+import { Component, ViewChild } from "@angular/core";
+import { NgxAntdFormViewerComponent } from '../../projects/ngx-antd-form-builder/src/public-api';
 
-[Demo Website](https://jaiwey.github.io/ngx-antd-form-builder) 
-
-
-
-![](screenshots.gif)
-
-## Install
-
-```bash
-npm install ngx-antd-form-builder ng-zorro-antd
-```
-
-# Basic Usage
-
-This package relys on codemirror and antd, make sure to import following style file 
-```scss
-@import "ng-zorro-antd/ng-zorro-antd.min.css";
-@import 'codemirror/lib/codemirror';
-```
-
-## Designer
-```typescript
-@Component({
-  selector: 'app-form-build',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NgxAntdFormBuilderComponent
-  ],
-  template: `
-  <ngx-antd-form-builder (saveSchema)="save($event)"></ngx-antd-form-builder>
-  `,
-})
-
-export class FormBuilderComponent {
-  @ViewChild('FormBuilder') FormBuilder!: NgxAntdFormBuilderComponent;
-
-  //save Schema callback
-  save(json) {
-    console.log(json)
-  }
-}
-```
-
-## Form Viewer
-
-```typescript
 @Component({
   selector: 'app-form-viewer',
   standalone: true,
@@ -131,17 +80,3 @@ export class FormViewerComponent {
     console.log(data)
   }
 }
-```
-
-# Vendor Dependencies
-- [ng-zorro-antd](https://ng.ant.design)
-- [ngx-codemirror](https://github.com/scttcper/ngx-codemirror)
-- [sortablejs](https://sortablejs.github.io/Sortable/)
-
-# Develop
-```bash
-$ npm install
-$ npm start
-```
-Then navigate to http://localhost:4200/ in your browser and you should be able to see the form builder in action.
-

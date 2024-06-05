@@ -1,15 +1,15 @@
 {
   "name": "ngx-antd-form-builder",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
-    "@ctrl/ngx-codemirror": "^7.0.0",
-    "codemirror": "^5.65.16",
-    "ng-zorro-antd": "^17.4.1",
-    "sortablejs": "^1.15.2"
+    "ng-zorro-antd": "^17.4.1"
   },
   "dependencies": {
+    "@ctrl/ngx-codemirror": "^7.0.0",
+    "codemirror": "^5.65.16",
+    "sortablejs": "^1.15.2",
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
