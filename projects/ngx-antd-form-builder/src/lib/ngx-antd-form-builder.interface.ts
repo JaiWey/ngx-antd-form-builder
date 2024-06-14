@@ -72,6 +72,13 @@ export declare namespace NgxAntdFormBuilder {
     rules: Array<rule>
   } & CommonProperty
 
+  export type DateType = {
+    type: 'date',
+    options: Record<| 'width' | 'placeholder', string> &
+    { disabled: boolean, mode: 'date'|'week'|'month'|'year', defaultValue: undefined | Date }
+    rules: Array<rule>
+  } & CommonProperty
+
   export type SwitchType =
     {
       type: 'switch',
@@ -97,7 +104,7 @@ export declare namespace NgxAntdFormBuilder {
     Record<'label' | 'key', string>
 
   export type AllComponentType = InputType | TextareaType | NumberType | SelectType | CheckboxType | RadioType
-    | RateType | SliderType | SwitchType | AlertType | TextType;
+    | DateType | RateType | SliderType | SwitchType | AlertType | TextType;
 
   export type DividerLayout =
     { type: 'divider', options: { orientation: "left" | "right" | "center" } }

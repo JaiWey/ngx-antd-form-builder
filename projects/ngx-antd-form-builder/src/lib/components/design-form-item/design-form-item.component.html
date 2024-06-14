@@ -8,6 +8,7 @@
   record.type === 'select' ||
   record.type === 'rate' ||
   record.type === 'switch' ||
+  record.type === 'date' ||
   record.type === 'slider'"
     [ngStyle]="isFlex ? { display: 'flex' }:{}">
     <nz-form-label
@@ -121,6 +122,14 @@
         <ng-container *ngIf="record.type == 'switch'">
           <nz-switch
            [formControlName]="record.key"></nz-switch>
+        </ng-container>
+        <ng-container *ngIf="record.type == 'date'">
+          <nz-date-picker
+            [ngStyle]="{'width': record.options.width}"
+            [formControlName]="record.key"
+            [nzMode]="record.options.mode"
+            [nzPlaceHolder]="record.options.placeholder"
+          ></nz-date-picker>
         </ng-container>
     </nz-form-control>
   </nz-form-item>

@@ -62,8 +62,8 @@
           Size
         </label>
         <div>
-          <nz-input-number nzPlaceHolder="最小高度" [(ngModel)]="options.minRows"></nz-input-number>
-          <nz-input-number nzPlaceHolder="最大高度" [(ngModel)]="options.maxRows"></nz-input-number>
+          <nz-input-number nzPlaceHolder="Min Rows" [(ngModel)]="options.minRows"></nz-input-number>
+          <nz-input-number nzPlaceHolder="Max Rows" [(ngModel)]="options.maxRows"></nz-input-number>
         </div>
       </div>
 
@@ -210,7 +210,7 @@
             Grid Gutter
           </label>
           <div>
-            <nz-input-number [(ngModel)]="selectItem.options.gutter" [nzPlaceHolder]="'请输入'"></nz-input-number>
+            <nz-input-number [(ngModel)]="selectItem.options.gutter"></nz-input-number>
           </div>
         </div>
         <div>
@@ -259,6 +259,34 @@
           ></nz-rate>
         </div>
       </div>
+
+      <!-- date -->
+      <ng-container *ngIf="selectItem.type === 'date'">
+        <div>
+          <label>
+            Type
+          </label>
+          <div>
+            <nz-radio-group [(ngModel)]="options.type">
+              <label nz-radio nzValue="date">Date</label>
+              <label nz-radio nzValue="week">Week</label>
+              <label nz-radio nzValue="month">Month</label>
+              <label nz-radio nzValue="year">Year</label>
+            </nz-radio-group>
+          </div>
+        </div>
+        <div>
+          <label>
+            Default
+          </label>
+          <div>
+            <nz-date-picker [nzMode]="options.mode" [(ngModel)]="options.defaultValue"></nz-date-picker>
+          </div>
+        </div>
+      </ng-container>
+      <!-- date end-->
+
+
       <div *ngIf="selectItem.type === 'select'">
         <label>
           Default
@@ -345,7 +373,7 @@
         </div>
       </ng-container>
 
-      <!-- button -->
+      <!-- alert -->
       <ng-container *ngIf="selectItem.type === 'alert'">
         <div>
           <label>

@@ -15,6 +15,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @Component({
   standalone: true,
@@ -24,7 +25,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
   imports: [ 
     ReactiveFormsModule,CommonModule,
     NzInputModule, NzInputNumberModule, NzFormModule, NzDividerModule,NzRateModule,
-    NzSelectModule,NzIconModule,NzSliderModule,NzSwitchModule,NzAlertModule,
+    NzSelectModule,NzIconModule,NzSliderModule,NzSwitchModule,NzAlertModule,NzDatePickerModule,
     DesignFormItemCheckboxComponent,DesignFormItemRadioComponent,HasRulePipe
   ]
 })

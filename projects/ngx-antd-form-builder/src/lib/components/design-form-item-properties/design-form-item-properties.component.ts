@@ -10,6 +10,7 @@ import { NzRadioModule } from "ng-zorro-antd/radio";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzSelectModule } from "ng-zorro-antd/select";
 import { NzCheckboxModule } from "ng-zorro-antd/checkbox";
+import { NzDatePickerModule } from "ng-zorro-antd/date-picker";
 
 @Component({
   standalone: true,
@@ -19,7 +20,7 @@ import { NzCheckboxModule } from "ng-zorro-antd/checkbox";
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
     NzRateModule, NzInputNumberModule, NzEmptyModule, NzRadioModule, NzInputModule,
-    NzSelectModule,NzCheckboxModule,
+    NzSelectModule,NzCheckboxModule,NzDatePickerModule,
     DesignFormChangeOptionComponent, DesignFormItemCheckboxComponent]
 })
 export class DesignFormItemPropertiesComponent implements OnChanges {

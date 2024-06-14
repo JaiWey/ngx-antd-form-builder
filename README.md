@@ -10,7 +10,7 @@ Simple Angular form builder that quickly generated forms.
 
 
 
-![](screenshots.gif)
+![](https://raw.githubusercontent.com/JaiWey/ngx-antd-form-builder/main/screenshots.gif)
 
 ## Install
 

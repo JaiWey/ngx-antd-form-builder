@@ -1,6 +1,11 @@
 {
   "name": "ngx-antd-form-builder",
-  "version": "0.0.3",
+  "version": "0.0.5",
+  "license": "MIT",
+  "description": "Simple Drag&Drop form builder using ng-zorro-antd",
+  "keywords": ["angular", "antd"],
+  "homepage": "https://github.com/JaiWey/ngx-antd-form-builder",
+  "repository": "https://github.com/JaiWey/ngx-antd-form-builder",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",

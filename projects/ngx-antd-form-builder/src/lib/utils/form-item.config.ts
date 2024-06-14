@@ -196,6 +196,26 @@ const sliderComponent: NgxAntdFormBuilder.SliderType = {
     ]
 };
 
+const dateComponent: NgxAntdFormBuilder.DateType = {
+  type: "date",
+  label: "Date",
+  options: {
+    width: '100%',
+    placeholder: 'Select Date',
+    disabled: false,
+    defaultValue: undefined,
+    mode: 'date',
+  },
+  key: "",
+  help: "",
+  rules: [
+    {
+      required: false,
+      message: "Field Required"
+    }
+  ]
+}
+
 const switchComponent: NgxAntdFormBuilder.SwitchType =   {
   type: "switch",
   label: "Switch",
@@ -241,7 +261,7 @@ const textComponent: NgxAntdFormBuilder.TextType =   {
 
 export const ComponentList: Array<NgxAntdFormBuilder.AllComponentType> = [
   inputComponent, textareaComponent, numberComponent,selectComponent,checkBoxComponent,
-  radioComponent,rateComponent, sliderComponent, alertComponent, textComponent
+  radioComponent,rateComponent, sliderComponent, alertComponent, textComponent, dateComponent
 ]
 
 
@@ -345,6 +365,7 @@ export const DefaultFields = [
   "radio",
   "rate",
   "slider",
+  "date",
   "switch",
   "alert",
   "text",

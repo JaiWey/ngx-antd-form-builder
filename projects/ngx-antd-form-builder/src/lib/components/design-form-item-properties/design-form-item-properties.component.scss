@@ -1,7 +1,9 @@
 :host{
   display: block;
-  width: 100%;
   padding: 0 10px 10px 10px;
+  width: 100%;
+  max-height: calc(100vh - 80px);
+  overflow: auto;
   .properties-body{
     > div{
       > div{
