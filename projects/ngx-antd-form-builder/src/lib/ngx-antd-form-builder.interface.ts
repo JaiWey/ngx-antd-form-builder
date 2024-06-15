@@ -98,7 +98,7 @@ export declare namespace NgxAntdFormBuilder {
   export type TextType =
     {
       type: 'text',
-      options: Record<'textAlign' | 'color' | 'fontFamily' | 'fontSize', string>
+      options: Record<'textAlign' | 'fontFamily' | 'fontSize', string>
       & Record<'showRequiredMark', boolean>
     } &
     Record<'label' | 'key', string>

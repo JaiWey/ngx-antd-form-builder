@@ -20,7 +20,7 @@ npm install ngx-antd-form-builder ng-zorro-antd
 
 # Basic Usage
 
-This package relys on codemirror and antd, make sure to import following style file 
+This package relys on codemirror and antd, make sure to import global style file and follow [ng-zorro-antd configuration guide](https://ng.ant.design/docs/getting-started/en)
 ```scss
 @import "ng-zorro-antd/ng-zorro-antd.min.css";
 @import 'codemirror/lib/codemirror';

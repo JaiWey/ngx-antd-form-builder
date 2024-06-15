@@ -252,8 +252,7 @@ const textComponent: NgxAntdFormBuilder.TextType =   {
   options: {
     textAlign: "left",
     showRequiredMark: false,
-    color: "rgb(0, 0, 0)",
-    fontFamily: "SimHei",
+    fontFamily: "",
     fontSize: "16pt"
   },
   key: ""

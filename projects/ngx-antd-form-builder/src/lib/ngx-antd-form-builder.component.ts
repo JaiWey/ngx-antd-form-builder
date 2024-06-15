@@ -97,7 +97,7 @@ import { cloneDeep } from './utils/func';
 })
 export class NgxAntdFormBuilderComponent {
   @Input() fields: Array<string> = DefaultFields
-  @Input() json: string | {[key: string]: string} | undefined
+  @Input() json: string | NgxAntdFormBuilder.Config | undefined | null
   @Output() readonly saveSchema: EventEmitter<NgxAntdFormBuilder.Config> = new EventEmitter()
   //@ViewChild('appDesignFormItemProperties') public appDesignFormItemProperties: DesignFormItemPropertiesComponent;
   //@Input() initData: any

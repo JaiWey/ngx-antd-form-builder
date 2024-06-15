@@ -267,7 +267,7 @@
             Type
           </label>
           <div>
-            <nz-radio-group [(ngModel)]="options.type">
+            <nz-radio-group [(ngModel)]="options.mode">
               <label nz-radio nzValue="date">Date</label>
               <label nz-radio nzValue="week">Week</label>
               <label nz-radio nzValue="month">Month</label>
@@ -437,6 +437,22 @@
               <label nz-radio-button nzValue="center">Center</label>
               <label nz-radio-button nzValue="right">Right</label>
             </nz-radio-group>
+          </div>
+        </div>
+        <div>
+          <label>
+            Font family
+          </label>
+          <div>
+            <input nz-input [(ngModel)]="options.fontFamily"/>
+          </div>
+        </div>
+        <div>
+          <label>
+            Font Size
+          </label>
+          <div>
+            <input nz-input [(ngModel)]="options.fontSize"/>
           </div>
         </div>
       </ng-container>
